@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import { Button } from 'react-native-elements'
 // StyleSheet for commit component
 import styles from './Style'
 
@@ -12,7 +12,7 @@ import {
   Image,
   TouchableHighlight,
   Linking,
-  Button,
+  StyleSheet
 } from 'react-native';
 
 
@@ -130,18 +130,28 @@ export default class Commit extends React.Component {
   render() {
     return (
       <View>
+      <View style={styles2.container}>
+        <View style={styles2.buttonContainer}>
         <Button
-  onPress={this.sortByName}
-  title="Trier par nom"
-  color="#841584"
-  accessibilityLabel="Learn more about this purple button"
-/>
-<Button
-onPress={this.sortByDate}
-title="Trier par date"
-color="#841584"
-accessibilityLabel="Learn more about this purple button"
-/>
+          large
+          icon={{name: 'sort-up', type: 'font-awesome'}}
+          onPress={this.sortByName}
+          title="Trier par nom"
+          backgroundColor="#841584"
+          accessibilityLabel="Learn more about this purple button"
+        />
+    </View>
+      <View style={styles2.buttonContainer}>
+      <Button
+          large
+          icon={{name: 'sort-up', type: 'font-awesome'}}
+        onPress={this.sortByDate}
+        title="Trier par date"
+        backgroundColor="#841584"
+        accessibilityLabel="Learn more about this purple button"
+        />
+    </View>
+    </View>
       <ScrollView refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
@@ -155,3 +165,14 @@ accessibilityLabel="Learn more about this purple button"
     );
   }
 }
+
+const styles2 = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonContainer: {
+    flex: 1,
+  }
+});

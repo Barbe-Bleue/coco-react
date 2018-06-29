@@ -9,7 +9,9 @@ import {
   TouchableHighlight,
   Linking,
   AppRegistry ,
-  Button
+  Button,
+  NavigatorIOS,
+  StatusBar
 } from 'react-native';
 
 export default class App extends React.Component {
@@ -57,12 +59,17 @@ export default class App extends React.Component {
     return this.state.res.slice(0,10).map((item) => {
       return (
         <View key={item.sha} style={div.container}>
-          <TouchableHighlight onPress={() =>
-             Linking.openURL(item.url)} >
-            <Image style={{width: 50, height: 50}} source={{uri: item.avatar}}/>
+          <TouchableHighlight onPress={() => Linking.openURL(item.url)}>
+            <Text>
+              <Image style={div.image} source={{uri: item.avatar}}/>
+                <Text>
+                  <Text style={div.user}>{item.user}</Text>
+                  <Text style={div.date}> : {item.date}</Text></Text>
+
+            </Text>
+
           </TouchableHighlight>
-          <Text style={{fontWeight: 'bold'}}>{item.user} : {item.date}</Text>
-          <Text>{item.message}</Text>
+          <Text style={div.msg}>{item.message}</Text>
         </View>
       );
     });
@@ -70,13 +77,14 @@ export default class App extends React.Component {
 
   render() {
     return (
+      <View>
       <ScrollView>
         {this.renderInfos()}
       </ScrollView>
+    </View>
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -90,6 +98,23 @@ const div = StyleSheet.create({
   container: {
     backgroundColor: '#cde7eb',
     marginTop:10,
-    borderWidth: 2
+    borderWidth: 1,
+    marginLeft: 5,
+    marginRight: 5
   },
+  image: {
+    width: 60,
+    height:70,
+  },
+  user: {
+    fontWeight: "bold",
+    color: "#17597a"
+  },
+  date : {
+    color: "#900e2e"
+  },
+  msg :{
+    fontWeight: "bold",
+    fontSize: 17
+  }
 });

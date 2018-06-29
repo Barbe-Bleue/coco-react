@@ -80,7 +80,7 @@ export default class Commit extends React.Component {
           </TouchableHighlight>
 
           {/* infos user*/}
-          <Text>
+          <Text style={div.infos}>
             <Text style={div.user}>{item.user}</Text>
             <Text style={div.date}> : {item.date}</Text>
           </Text>
@@ -104,26 +104,36 @@ export default class Commit extends React.Component {
 // StyleSheet for commit component
 const div = StyleSheet.create({
   container: {
-    backgroundColor: '#cde7eb',
     marginTop:10,
-    borderWidth: 1,
+    borderBottomWidth: 3,
+    borderColor: "#444",
     marginLeft: 5,
-    marginRight: 5
+    marginRight: 5,
   },
   image: {
     width: 60,
     height:70,
+    borderColor: "white",
+    borderWidth: 1,
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   user: {
     fontWeight: "bold",
-    color: "#17597a",
-    fontSize: 15
+    color: "#4aede5",
   },
   date : {
-    color: "#900e2e"
+    color: "#4aed94",
+  },
+  infos: {
+    textAlign: "center",
+    fontSize: 20,
   },
   msg :{
     fontWeight: "bold",
-    fontSize: 17
+    fontSize: 20,
+    color: "white",
+    marginTop: 10,
+    marginBottom: 15,
   }
 });

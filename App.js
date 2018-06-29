@@ -1,6 +1,16 @@
 import React from 'react';
 import axios from 'axios'
-import { StyleSheet, Text, ScrollView, View, Image, TouchableHighlight, Linking, AppRegistry } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  ScrollView,
+  View,
+  Image,
+  TouchableHighlight,
+  Linking,
+  AppRegistry ,
+  Button
+} from 'react-native';
 
 export default class App extends React.Component {
 
@@ -46,7 +56,7 @@ export default class App extends React.Component {
     // item = un des items (key => value)
     return this.state.res.slice(0,10).map((item) => {
       return (
-        <View key={item.sha}>
+        <View key={item.sha} style={div.container}>
           <TouchableHighlight onPress={() =>
              Linking.openURL(item.url)} >
             <Image style={{width: 50, height: 50}} source={{uri: item.avatar}}/>
@@ -73,5 +83,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+});
+
+const div = StyleSheet.create({
+  container: {
+    backgroundColor: '#cde7eb',
+    marginTop:10,
+    borderWidth: 2
   },
 });

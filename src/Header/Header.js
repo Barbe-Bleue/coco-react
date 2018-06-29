@@ -6,7 +6,7 @@ export default class Head extends React.Component {
 return(
         <Header
           centerComponent={{ text: 'LAST COMMITS', style: { color: '#fff' } }}
-          rightComponent={{ icon: 'home', color: '#fff' }}
+          outerContainerStyles={{ backgroundColor: '#000' }}
         />
     );
   }

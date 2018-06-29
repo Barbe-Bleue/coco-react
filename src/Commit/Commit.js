@@ -130,8 +130,8 @@ export default class Commit extends React.Component {
   render() {
     return (
       <View>
-      <View style={styles2.container}>
-        <View style={styles2.buttonContainer}>
+      <View style={styles.sortContainer}>
+        <View style={styles.buttonContainer}>
         <Button
           large
           icon={{name: 'sort-up', type: 'font-awesome'}}
@@ -141,7 +141,7 @@ export default class Commit extends React.Component {
           accessibilityLabel="Learn more about this purple button"
         />
     </View>
-      <View style={styles2.buttonContainer}>
+      <View style={styles.buttonContainer}>
       <Button
           large
           icon={{name: 'sort-up', type: 'font-awesome'}}
@@ -165,14 +165,3 @@ export default class Commit extends React.Component {
     );
   }
 }
-
-const styles2 = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonContainer: {
-    flex: 1,
-  }
-});

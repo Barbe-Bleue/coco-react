@@ -34,5 +34,13 @@ export default StyleSheet.create({
     color: "white",
     marginTop: 10,
     marginBottom: 15,
+  },
+  sortContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonContainer: {
+    flex: 1,
   }
 })

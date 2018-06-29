@@ -13,6 +13,7 @@ import {
   NavigatorIOS,
   StatusBar
 } from 'react-native';
+import {Avatar} from 'react-native-elements'
 
 export default class Commit extends React.Component {
 
@@ -70,7 +71,7 @@ export default class Commit extends React.Component {
   renderInfos() {
     // .map = looper sur les items
     // item = un des items (key => value)
-    return this.state.res.slice(0,10).map((item) => {
+    return this.state.res.map((item) => {
       return (
         <View key={item.sha} style={div.container}>
 
@@ -94,9 +95,9 @@ export default class Commit extends React.Component {
 
   render() {
     return (
-      <ScrollView>
+      <View>
         {this.renderInfos()}
-      </ScrollView>
+      </View>
     );
   }
 }
@@ -111,12 +112,13 @@ const div = StyleSheet.create({
     marginRight: 5,
   },
   image: {
-    width: 60,
+    width: 70,
     height:70,
     borderColor: "white",
     borderWidth: 1,
     marginLeft: "auto",
     marginRight: "auto",
+    borderRadius: 70 / 2
   },
   user: {
     fontWeight: "bold",

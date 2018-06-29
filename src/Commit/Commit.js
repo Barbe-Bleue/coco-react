@@ -1,19 +1,18 @@
 import React from 'react';
 import axios from 'axios';
+
+// StyleSheet for commit component
+import styles from './Style'
+
 import {
-  StyleSheet,
   Text,
-  ScrollView,
   View,
   Image,
   TouchableHighlight,
   Linking,
-  AppRegistry ,
   Button,
-  NavigatorIOS,
-  StatusBar
 } from 'react-native';
-import {Avatar} from 'react-native-elements'
+
 
 export default class Commit extends React.Component {
 
@@ -73,21 +72,21 @@ export default class Commit extends React.Component {
     // item = un des items (key => value)
     return this.state.res.map((item) => {
       return (
-        <View key={item.sha} style={div.container}>
+        <View key={item.sha} style={styles.container}>
 
           {/* element cliquable*/}
           <TouchableHighlight onPress={() => Linking.openURL(item.url)}>
-            <Image style={div.image} source={{uri: item.avatar}}/>
+            <Image style={styles.image} source={{uri: item.avatar}}/>
           </TouchableHighlight>
 
           {/* infos user*/}
-          <Text style={div.infos}>
-            <Text style={div.user}>{item.user}</Text>
-            <Text style={div.date}> : {item.date}</Text>
+          <Text style={styles.infos}>
+            <Text style={styles.user}>{item.user}</Text>
+            <Text style={styles.date}> : {item.date}</Text>
           </Text>
 
           {/* commit message*/}
-          <Text style={div.msg}>{item.message}</Text>
+          <Text style={styles.msg}>{item.message}</Text>
         </View>
       );
     });
@@ -101,41 +100,3 @@ export default class Commit extends React.Component {
     );
   }
 }
-
-// StyleSheet for commit component
-const div = StyleSheet.create({
-  container: {
-    marginTop:10,
-    borderBottomWidth: 3,
-    borderColor: "#444",
-    marginLeft: 5,
-    marginRight: 5,
-  },
-  image: {
-    width: 70,
-    height:70,
-    borderColor: "white",
-    borderWidth: 1,
-    marginLeft: "auto",
-    marginRight: "auto",
-    borderRadius: 70 / 2
-  },
-  user: {
-    fontWeight: "bold",
-    color: "#4aede5",
-  },
-  date : {
-    color: "#4aed94",
-  },
-  infos: {
-    textAlign: "center",
-    fontSize: 20,
-  },
-  msg :{
-    fontWeight: "bold",
-    fontSize: 20,
-    color: "white",
-    marginTop: 10,
-    marginBottom: 15,
-  }
-});

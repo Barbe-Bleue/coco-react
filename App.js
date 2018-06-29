@@ -14,7 +14,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View>
-
+        <Head/> 
         <View style={styles.container}>
           <Commit/>
         </View>

@@ -24,6 +24,8 @@ export default class Commit extends React.Component {
       res: [],
       refreshing: false
     }
+    this.sortByName = this.sortByName.bind(this);
+    this.sortByDate = this.sortByDate.bind(this);
   }
 
   // when pull to refresh
@@ -47,7 +49,6 @@ export default class Commit extends React.Component {
 
         // loop on all commits
         for(let data of response.data) {
-          //console.log(typeof(data.commiter));
 
           // format date
           date = new Date(data.commit.author.date);
@@ -58,10 +59,10 @@ export default class Commit extends React.Component {
           message = m.substring(0, m.indexOf('\n'));
 
           // get avatar url
-          if(data.committer !== null){
-            avatar = data.committer.avatar_url;
-          } else if(data.author !== null) {
+          if(data.author !== null){
             avatar = data.author.avatar_url;
+          } else if(data.commiter !== null) {
+            avatar = data.commiter.avatar_url;
           } else {
             // default avatar
             avatar = "https://cdn0.iconfinder.com/data/icons/octicons/1024/mark-github-128.png";
@@ -86,6 +87,22 @@ export default class Commit extends React.Component {
       });
   }
 
+  sortByProperty(property) {
+    return function (x, y) {
+      return ((x[property] === y[property]) ? 0 : ((x[property] > y[property]) ? 1 : -1));
+    };
+  }
+
+  sortByName() {
+    this.setState({
+      res: this.state.res.sort(this.sortByProperty('user'))
+    });
+  }
+  sortByDate() {
+    this.setState({
+      res: this.state.res.sort(this.sortByProperty('date'))
+    });
+  }
   renderInfos() {
     // .map = loop on items
     // item = one of the items (key => value)
@@ -113,6 +130,19 @@ export default class Commit extends React.Component {
 
   render() {
     return (
+      <View>
+        <Button
+  onPress={this.sortByName}
+  title="Trier par nom"
+  color="#841584"
+  accessibilityLabel="Learn more about this purple button"
+/>
+<Button
+onPress={this.sortByDate}
+title="Trier par date"
+color="#841584"
+accessibilityLabel="Learn more about this purple button"
+/>
       <ScrollView refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
@@ -120,7 +150,9 @@ export default class Commit extends React.Component {
           />
         }>
         {this.renderInfos()}
+
       </ScrollView>
+    </View>
     );
   }
 }

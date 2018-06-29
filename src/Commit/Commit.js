@@ -22,6 +22,8 @@ export default class Commit extends React.Component {
       res: []
     }
   }
+
+  // éxécution avant affichage
   componentDidMount() {
     axios.get('https://api.github.com/repos/torvalds/linux/commits')
     .then( (response) => {
@@ -29,12 +31,14 @@ export default class Commit extends React.Component {
         // init variables
         var avatar,m,message,date,newDate;
 
+        // on boucle sur tous les commits
         for(let data of response.data) {
+
           // format date
           date = new Date(data.commit.author.date);
           newDate = date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
 
-          // extract first line commit msg
+          // extract first line from commit msg
           m = data.commit.message;
           message = m.substring(0, m.indexOf('\n'));
 
@@ -55,7 +59,7 @@ export default class Commit extends React.Component {
             url: data.html_url
           }
 
-          //
+          // On reprend le tableau à l'origine, et ajout du nouvel item
           this.setState({res: [...this.state.res, infos]});
         }
       }).catch(function (error) {
@@ -97,6 +101,7 @@ export default class Commit extends React.Component {
   }
 }
 
+// StyleSheet for commit component
 const div = StyleSheet.create({
   container: {
     backgroundColor: '#cde7eb',

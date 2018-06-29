@@ -49,7 +49,6 @@ export default class Commit extends React.Component {
 
         // loop on all commits
         for(let data of response.data) {
-
           // format date
           date = new Date(data.commit.author.date);
           newDate = date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
@@ -61,8 +60,6 @@ export default class Commit extends React.Component {
           // get avatar url
           if(data.author !== null){
             avatar = data.author.avatar_url;
-          } else if(data.commiter !== null) {
-            avatar = data.commiter.avatar_url;
           } else {
             // default avatar
             avatar = "https://cdn0.iconfinder.com/data/icons/octicons/1024/mark-github-128.png";
@@ -87,6 +84,7 @@ export default class Commit extends React.Component {
       });
   }
 
+  // sort function
   sortByProperty(property) {
     return function (x, y) {
       return ((x[property] === y[property]) ? 0 : ((x[property] > y[property]) ? 1 : -1));
@@ -103,6 +101,7 @@ export default class Commit extends React.Component {
       res: this.state.res.sort(this.sortByProperty('date'))
     });
   }
+
   renderInfos() {
     // .map = loop on items
     // item = one of the items (key => value)

@@ -5,11 +5,8 @@ export default class Head extends React.Component {
   render() {
 return(
         <Header
-          leftComponent={{ icon: 'menu', color: '#fff' }}
-          centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+          centerComponent={{ text: 'LAST COMMITS', style: { color: '#fff' } }}
           rightComponent={{ icon: 'home', color: '#fff' }}
-          outerContainerStyles={{ backgroundColor: '#000' }}
-
         />
     );
   }

@@ -4,10 +4,10 @@ Below you'll find information about performing common tasks. The most recent ver
 
 ## Start project
 
-  git checkout dev
-  yarn install
-  yarn start
+    git checkout dev
+    yarn install
+    yarn start
 
 ## Requirement
-  yarn
-  Xcode
+    yarn
+    Xcode

@@ -12,7 +12,6 @@ import {
   Image,
   TouchableHighlight,
   Linking,
-  StyleSheet
 } from 'react-native';
 
 

@@ -7,6 +7,8 @@ import styles from './Style'
 import {
   Text,
   View,
+  ScrollView,
+  RefreshControl,
   Image,
   TouchableHighlight,
   Linking,
@@ -19,13 +21,23 @@ export default class Commit extends React.Component {
   constructor(){
     super();
     this.state = {
-      res: []
+      res: [],
+      refreshing: false
     }
+  }
+
+  // when pull to refresh
+  _onRefresh = () => {
+    this.setState({refreshing: true, res:[]});
+    this.fetchData();
   }
 
   // execute before display
   componentDidMount() {
+    this.fetchData();
+  }
 
+  fetchData() {
     // get all commits
     axios.get('https://api.github.com/repos/torvalds/linux/commits')
     .then( (response) => {
@@ -35,6 +47,7 @@ export default class Commit extends React.Component {
 
         // loop on all commits
         for(let data of response.data) {
+          //console.log(typeof(data.commiter));
 
           // format date
           date = new Date(data.commit.author.date);
@@ -45,10 +58,13 @@ export default class Commit extends React.Component {
           message = m.substring(0, m.indexOf('\n'));
 
           // get avatar url
-          if(data.committer){
+          if(data.committer !== null){
             avatar = data.committer.avatar_url;
-          } else {
+          } else if(data.author !== null) {
             avatar = data.author.avatar_url;
+          } else {
+            // default avatar
+            avatar = "https://cdn0.iconfinder.com/data/icons/octicons/1024/mark-github-128.png";
           }
 
           // All infos
@@ -64,6 +80,7 @@ export default class Commit extends React.Component {
           // get the array at the origin and adds an element
           this.setState({res: [...this.state.res, infos]});
         }
+        this.setState({refreshing: false});
       }).catch(function (error) {
         console.log(error);
       });
@@ -74,8 +91,6 @@ export default class Commit extends React.Component {
     // item = one of the items (key => value)
     return this.state.res.map((item) => {
       return (
-
-        {/* commit */}
         <View key={item.sha} style={styles.container}>
 
           {/* touchable element */}
@@ -98,9 +113,14 @@ export default class Commit extends React.Component {
 
   render() {
     return (
-      <View>
+      <ScrollView refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh}
+          />
+        }>
         {this.renderInfos()}
-      </View>
+      </ScrollView>
     );
   }
 }

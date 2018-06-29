@@ -14,10 +14,10 @@ export default class App extends React.Component {
   render() {
     return (
       <View>
-        <Head/>
-        <ScrollView style={styles.container}>
+
+        <View style={styles.container}>
           <Commit/>
-        </ScrollView>
+        </View>
         <Footer/>
       </View>
     );

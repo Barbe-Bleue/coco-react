@@ -23,15 +23,17 @@ export default class Commit extends React.Component {
     }
   }
 
-  // éxécution avant affichage
+  // execute before display
   componentDidMount() {
+
+    // get all commits
     axios.get('https://api.github.com/repos/torvalds/linux/commits')
     .then( (response) => {
 
         // init variables
         var avatar,m,message,date,newDate;
 
-        // on boucle sur tous les commits
+        // loop on all commits
         for(let data of response.data) {
 
           // format date
@@ -59,7 +61,7 @@ export default class Commit extends React.Component {
             url: data.html_url
           }
 
-          // On reprend le tableau à l'origine, et ajout du nouvel item
+          // get the array at the origin and adds an element
           this.setState({res: [...this.state.res, infos]});
         }
       }).catch(function (error) {
@@ -68,18 +70,20 @@ export default class Commit extends React.Component {
   }
 
   renderInfos() {
-    // .map = looper sur les items
-    // item = un des items (key => value)
+    // .map = loop on items
+    // item = one of the items (key => value)
     return this.state.res.map((item) => {
       return (
+
+        {/* commit */}
         <View key={item.sha} style={styles.container}>
 
-          {/* element cliquable*/}
+          {/* touchable element */}
           <TouchableHighlight onPress={() => Linking.openURL(item.url)}>
             <Image style={styles.image} source={{uri: item.avatar}}/>
           </TouchableHighlight>
 
-          {/* infos user*/}
+          {/* user infos*/}
           <Text style={styles.infos}>
             <Text style={styles.user}>{item.user}</Text>
             <Text style={styles.date}> : {item.date}</Text>

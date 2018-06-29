@@ -1,8 +1,8 @@
 import React from 'react';
-import Commit from './src/Commit/Commit'
-import Head from './src/Header/Header'
-import Footer from './src/Footer/Footer'
 import styles from'./Style'
+import Head from './src/Header/Header'
+import Commit from './src/Commit/Commit'
+import Footer from './src/Footer/Footer'
 import {
   View,
   ScrollView,

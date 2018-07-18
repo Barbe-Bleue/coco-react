@@ -11,3 +11,7 @@ Below you'll find information about performing common tasks. The most recent ver
 ## Requirement
     yarn
     Xcode
+
+## Screenshot
+
+![Screenshot](/screenshot.png)
